@@ -4,13 +4,16 @@ I want to implement a system to organize my Cursor artifacts. This involves a fi
 
 ## General guidelines
 
-Ask the user if they want to create this Cursor file structure in the repository root or some other place. If the latter, they will need to supply an absolute path where they want the Cursor file structure to be created.
+Ask the user two things:
+
+1. If they want to create this Cursor file structure in the repository root or some other place. If the latter, they will need to supply an absolute path where they want the Cursor file structure to be created.
+2. If they want to add the empty repos that will be created to version control. 
 
 The file structure is a way to organize documents telling Cursor agents what to do. They are broken out in logical section such as `bugs`, `features`, and `docs`. The idea is that relevant Cursor instructions live in these folders. This should make it easier for the user to create and reference particular documents for Cursor agents when needed.
 
 If part of the file structure already exists in the place that use your specifies, modify it to match the schema below. Do not delete or modify any existing files in the file system, except for moving them to an an appropriate place. For example, there could already by a `<project>/.cursor/rules` directory with rules in it but no other subdirectories under `.cursor`. These would need to be created.
 
-For empty sub directories that you create, add a `.gitkeep` file to enable the directory to go under version control.
+For empty sub directories that you create, if the user has specified that they want to add the empty repos that will be created to version control, add a `.gitkeep` file for each such directory. Else, don't create this file. The empty folders in this case will not be under version control. 
 
 The following sections detail how this new Cursor file structure should look depending on the option that the user chooses.
 
@@ -24,6 +27,7 @@ The new Cursor file structure should be:
 project/
     ├── .cursor 
     |   |__rules/ # Rules used by Cursor. See the Cursor rule `~/cursor-commands/create_cursor_rules.md` for details. This is the only subdirectory that will automatically be read by the Cursor agent. All others will contain documents that the user will need to manually share with the agent.
+        |__research/ # For research related to the project. Could be things like investigating local restaurants for a restaurant listing app, or car dealerships for an app built to save users money on car purchases, etc. 
         |__bugs/ # For bug-related instructions. Usually instructions for investigating a bug. 
         |__features/ # Docs for agents to build out features
         |__refactors/ # Docs related to refactoring. 
@@ -43,6 +47,7 @@ Within this user specified directory, create the file structure as above:
 <user-specified-project>/
     ├── .cursor 
     |   |__rules/ # Rules used by Cursor. See the Cursor rule `~/cursor-commands/create_cursor_rules.md` for details. This is the only subdirectory that will automatically be read by the Cursor agent. All others will contain documents that the user will need to manually share with the agent.
+        |__research/ # For research related to the project. Could be things like investigating local restaurants for a restaurant listing app, or car dealerships for an app built to save users money on car purchases, etc. 
         |__bugs/ # For bug-related instructions. Usually instructions for investigating a bug. 
         |__features/ # Docs for agents to build out features
         |__refactors/ # Docs related to refactoring. 
